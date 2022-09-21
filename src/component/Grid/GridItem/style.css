@@ -1,0 +1,27 @@
+.GridItem-container {
+    position: relative;
+}
+
+.GridItem-media{
+    max-width: 100%;
+    max-height: 14rem;
+    background-color: #ff8104;
+    border-radius: 2%;
+    margin: .5rem;
+    display: block;
+    cursor: pointer;
+}
+
+.GridItem-icon{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.5rem;
+    padding: .5rem 1rem;
+    opacity: 0.5;
+}
+
+.GridItem-icon--fav{
+    color: #ff8104;
+    opacity: 1;
+}

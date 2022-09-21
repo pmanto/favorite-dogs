@@ -1,0 +1,28 @@
+.NavBar{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    overflow: hidden;
+    display: flex;
+    background-color: #282c34;
+    color: #ffffff;
+    padding: 0;
+    z-index: 9999;
+}
+
+a.NavBar-link{
+    color: #ffffff;
+}
+
+.NavBar-item{
+    font-weight: bold;
+    padding: 1rem 2rem;
+}
+
+.NavBar-link--active{
+    background-color: #ff8104;
+}
+
+.NavBar-link:hover:not(.NavBar-link--active){
+    background-color: #000000;
+}
