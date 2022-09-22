@@ -3,15 +3,15 @@ import React from 'react';
 import GridItem from './GridItem';
 
 class Grid extends React.Component {
-    getGridItems(){
+    getGridItems() {
         let content = [];
-        for(let i = 0; i < this.props.count; i++){
-            content.push(<GridItem key={`grid-${i}`}/>);
-        }
+        this.props.items.forEach((item, index) => {
+            content.push(<GridItem key={`grid-${index}`} url={item} />);
+        });
 
         return content;
     }
-    
+
     render() {
         return (
             <div className="Grid">

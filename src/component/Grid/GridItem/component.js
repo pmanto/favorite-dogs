@@ -6,36 +6,17 @@ class GridItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'mediaUrl': null,
-            'isFavorite': false
+            'isFavorite': localStorage.getItem(this.getFavoriteKey()) !== null
+
         };
     }
 
-    componentDidMount() {
-        this.getMedia();
-    }
-
-    getMedia() {
-        fetch('https://random.dog/woof.json')
-            .then(response => response.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        mediaUrl: result.url
-                    });
-
-                    this.setState({
-                        isFavorite: localStorage.getItem(this.getFavoriteKey()) !== null
-                    })
-                });
-    }
-
     isVideo() {
-        if (this.state.mediaUrl === null || this.state.mediaUrl === '') {
+        if (this.props.url === null || this.props.url === '') {
             return false;
         }
 
-        const url = this.state.mediaUrl.split('.');
+        const url = this.props.url.split('.');
         const extension = url[url.length - 1];
         return extension === 'mp4';
     }
@@ -51,7 +32,7 @@ class GridItem extends React.Component {
     }
 
     getFavoriteKey() {
-        return `favorite-${this.state.mediaUrl}`;
+        return `favorite-${this.props.url}`;
     }
 
     render() {
@@ -60,13 +41,13 @@ class GridItem extends React.Component {
                 <div className='GridItem-container' onClick={() => this.addRemoveFavorite()}>
                     {this.isVideo() &&
                         (<video className='GridItem-media' controls>
-                            <source src={this.state.mediaUrl}>
+                            <source src={this.props.url}>
                             </source>
                         </video>)
                     }
 
                     {!this.isVideo() &&
-                        (<img className='GridItem-media' src={this.state.mediaUrl}></img>)
+                        (<img className='GridItem-media' src={this.props.url}></img>)
                     }
 
                     <FontAwesomeIcon className={`GridItem-icon ${this.state.isFavorite ? 'GridItem-icon--fav' : ''}`} icon="heart" />
