@@ -9,7 +9,7 @@ class Favorite extends React.Component {
         };
     }
 
-    getItems() {
+    getItems = () => {
         let items = [];
         for(let i = 0; i < localStorage.length; i++){
             if(localStorage.key(i).indexOf('favorite-') === 0){
@@ -20,13 +20,13 @@ class Favorite extends React.Component {
         return items;
     }
 
-    showContent() {
+    showContent = () => {
         return this.state.items.length > 0;
     }
 
     render() {
         return (
-            <div className="Discover">
+            <div className="Discover" data-testid='favorites-grid'>
                 {this.showContent() &&
                     (<Grid items={this.state.items}></Grid>)
                 }

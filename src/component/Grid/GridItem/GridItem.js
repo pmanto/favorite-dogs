@@ -2,26 +2,27 @@ import './style.css';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+const TYPES = new Map([['mp4', 'video'], ['webm', 'video'], ['ogg', 'video']]);
+
 class GridItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             'isFavorite': localStorage.getItem(this.getFavoriteKey()) !== null
-
         };
     }
 
-    isVideo() {
+    isVideo = () => {
         if (this.props.url === null || this.props.url === '') {
             return false;
         }
 
         const url = this.props.url.split('.');
         const extension = url[url.length - 1];
-        return extension === 'mp4';
+        return TYPES.get(extension) === 'video';
     }
 
-    addRemoveFavorite() {
+    addRemoveFavorite = () => {
         if (this.state.isFavorite) {
             localStorage.removeItem(this.getFavoriteKey());
         } else {
@@ -31,14 +32,14 @@ class GridItem extends React.Component {
         this.setState({ isFavorite: !this.state.isFavorite });
     }
 
-    getFavoriteKey() {
+    getFavoriteKey = () => {
         return `favorite-${this.props.url}`;
     }
 
     render() {
         return (
             <div className='GridItem'>
-                <div className='GridItem-container' onClick={() => this.addRemoveFavorite()}>
+                <div className='GridItem-container' onClick={this.addRemoveFavorite}>
                     {this.isVideo() &&
                         (<video className='GridItem-media' controls>
                             <source src={this.props.url}>

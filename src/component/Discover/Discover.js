@@ -10,10 +10,12 @@ class Discover extends React.Component {
     }
 
     componentDidMount() {
-        this.addItem();
+        for(let i = 0; i < this.props.count; i++){
+            this.addItem();
+        }
     }
 
-    addItem() {
+    addItem = () => {
         if (this.state.items.length === this.props.count) {
             return;
         }
@@ -26,18 +28,17 @@ class Discover extends React.Component {
                     if (this.state.items.length < this.props.count) {
                         this.state.items.push(result.url);
                         this.setState({ items: this.state.items });
-                        this.addItem();
                     }
                 });
     }
 
-    showContent() {
+    showContent = () => {
         return this.state.items.length > 0 && this.props.count === this.state.items.length;
     }
 
     render() {
         return (
-            <div className="Discover">
+            <div className="Discover" data-testid='discover-grid'>
                 {this.showContent() &&
                     (<Grid items={this.state.items}></Grid>)
                 }
